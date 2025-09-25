@@ -1,0 +1,37 @@
+.hero-section {
+  padding: 60px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.flex-hero {
+  max-width: 800px;
+  margin: auto;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #00f, #0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.blob-cont {
+  display: inline-block;
+  margin: 10px;
+}
+
+.blob {
+  width: 40px;
+  height: 40px;
+  background: #007bff;
+  border-radius: 50%;
+}
