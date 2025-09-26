@@ -1,14 +1,13 @@
-import React from "react"; // Import React
+import React from "react";
+import "./LandingPage.css";
 
-import "./LandingPage.css"; // Import CSS styles
-
-const Landing_Page = () => {
+const LandingPage = () => {
   return (
     <section className="hero-section">
       <div>
         <div data-aos="fade-up" className="flex-hero">
           <h1>
-            Your Health <br />
+            Your Health<br/>
             <span className="text-gradient">Our Responsibility</span>
           </h1>
           <div className="blob-cont">
@@ -18,8 +17,7 @@ const Landing_Page = () => {
             <div className="blue1 blob"></div>
           </div>
           <h4>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque at
-            quae ducimus. Suscipit omnis quibusdam non cum rem voluptatem!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque at quae ducimus.
           </h4>
           <a href="#services">
             <button className="button">Get Started</button>
@@ -30,4 +28,4 @@ const Landing_Page = () => {
   );
 };
 
-export default Landing_Page;
+export default LandingPage;
