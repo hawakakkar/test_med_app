@@ -10,37 +10,45 @@ const InstantConsultation = () => {
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
 
+  // mapping of name → image URL for special doctors
+  const doctorImages = {
+    'Dr. Denis Raj':
+      'https://bpic.588ku.com/element_origin_min_pic/23/09/25/77212ff637c099e705b1fbd04b5d26b4.jpg',
+    'Dr. Jiao Yang':
+      'https://i.pinimg.com/736x/6a/e1/59/6ae1599c62af3dc358f95d68bf344298.jpg',
+    'Dr. Lyn Christie':
+      'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSAJsGn2UHZ507PT2boeQtQlmljrq91Ea8oQxFZUA8xNW7NIB7T',
+  };
+
   // fetch doctors list
   const getDoctorsDetails = useCallback(() => {
     fetch('https://api.npoint.io/9a5543d36f1460da2f63')
-      .then(res => res.json())
-      .then(data => {
-        // only pre-filter if URL has a speciality
+      .then((res) => res.json())
+      .then((data) => {
         if (searchParams.get('speciality')) {
           const filtered = data.filter(
-            doctor =>
+            (doctor) =>
               doctor.speciality.toLowerCase() ===
               searchParams.get('speciality').toLowerCase()
           );
           setFilteredDoctors(filtered);
           setIsSearched(true);
         } else {
-          // start empty, nothing selected yet
           setFilteredDoctors([]);
           setIsSearched(false);
         }
         setDoctors(data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, [searchParams]);
 
   // handle search input from the search bar
-  const handleSearch = searchText => {
+  const handleSearch = (searchText) => {
     if (searchText === '') {
       setFilteredDoctors([]);
       setIsSearched(false);
     } else {
-      const filtered = doctors.filter(doctor =>
+      const filtered = doctors.filter((doctor) =>
         doctor.speciality.toLowerCase().includes(searchText.toLowerCase())
       );
       setFilteredDoctors(filtered);
@@ -70,14 +78,15 @@ const InstantConsultation = () => {
                 Book appointments with minimum wait-time & verified doctor details
               </h3>
               {filteredDoctors.length > 0 ? (
-                filteredDoctors.map(doctor => (
+                filteredDoctors.map((doctor) => (
                   <DoctorCardIC
                     key={doctor.name}
                     name={doctor.name}
                     speciality={doctor.speciality}
                     experience={doctor.experience}
                     ratings={doctor.ratings}
-                    profilePic="https://i.pinimg.com/736x/6a/e1/59/6ae1599c62af3dc358f95d68bf344298.jpg"
+                    // 👇 pick image from map; fallback default inside DoctorCardIC
+                    image={doctorImages[doctor.name]}
                   />
                 ))
               ) : (

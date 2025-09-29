@@ -22,7 +22,47 @@
     cursor: pointer;
     font-size: 14px;
 }
+/* container of input + icon */
+.search-input-wrapper {
+  display: flex;
+  align-items: right;
+  width: 600px; /* make bar large */
+  height: 50px; /* bar height */
+  border: 1px solid #3b3a3a;
+  border-radius: 5px;
+  overflow: hidden;
+}
 
+.search-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #efefef;
+  border-right: 1px solid #3b3a3a;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  position:right;
+}
+
+.search-doctor-input-box {
+  flex: 1;
+  height: 100%;
+  padding: 0 15px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+   position:right;
+}
+
+.search-doctor-input-results {
+  width: 600px; /* match the bar width */
+  margin-top: 2px;
+}
 .search-location-input-results {
     position: absolute;
     top: 40px;

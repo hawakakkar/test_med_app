@@ -6,7 +6,7 @@ import LandingPage from './Components/Landing_Page/LandingPage';
 import SignUp from "./Components/Sign_Up/Sign_Up";  
 import Login from './Components/Login/Login';                  
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultationBooking/InstantConsultation';
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
 function App() {
   return (
     <BrowserRouter>

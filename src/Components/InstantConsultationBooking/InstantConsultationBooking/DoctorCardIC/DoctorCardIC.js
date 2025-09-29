@@ -5,11 +5,11 @@ import './DoctorCardIC.css';
 import AppointmentFormIC from '../AppointmentFormIC/AppointmentFormIC';
 import { v4 as uuidv4 } from 'uuid';
 
-const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
+// ✅ added image prop
+const DoctorCardIC = ({ name, speciality, experience, ratings, image }) => {
   const [showModal, setShowModal] = useState(false);
   const [appointments, setAppointments] = useState([]);
 
-  // now this will actually be used
   const handleBooking = () => {
     setShowModal(true);
   };
@@ -24,7 +24,7 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
   const handleFormSubmit = (appointmentData) => {
     const newAppointment = {
       id: uuidv4(),
-      ...appointmentData,
+      ...appointmentData, // includes name, phoneNumber, appointmentDate, timeSlot
     };
     const updatedAppointments = [...appointments, newAppointment];
     setAppointments(updatedAppointments);
@@ -36,7 +36,11 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
       <div className="doctor-card-details-container">
         <div className="doctor-card-profile-image-container">
           <img
-            src="https://i.pinimg.com/736x/6a/e1/59/6ae1599c62af3dc358f95d68bf344298.jpg"
+            src={
+              image
+                ? image
+                : 'https://i.pinimg.com/736x/6a/e1/59/6ae1599c62af3dc358f95d68bf344298.jpg'
+            }
             alt={name}
             style={{ width: '60px', height: '60px', borderRadius: '50%' }}
           />
@@ -58,7 +62,7 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
           style={{ backgroundColor: '#FFFFFF' }}
           trigger={
             <button
-              onClick={handleBooking} // 👈 now used
+              onClick={handleBooking}
               className={`book-appointment-btn ${
                 appointments.length > 0 ? 'cancel-appointment' : ''
               }`}
@@ -83,7 +87,11 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
               <div>
                 <div className="doctor-card-profile-image-container">
                   <img
-                    src="https://i.pinimg.com/736x/6a/e1/59/6ae1599c62af3dc358f95d68bf344298.jpg"
+                    src={
+                      image
+                        ? image
+                        : 'https://i.pinimg.com/736x/6a/e1/59/6ae1599c62af3dc358f95d68bf344298.jpg'
+                    }
                     alt={name}
                     style={{ width: '60px', height: '60px', borderRadius: '50%' }}
                   />
@@ -107,6 +115,9 @@ const DoctorCardIC = ({ name, speciality, experience, ratings }) => {
                     <div className="bookedInfo" key={appointment.id}>
                       <p>Name: {appointment.name}</p>
                       <p>Phone Number: {appointment.phoneNumber}</p>
+                      {/* NEW: show date and time slot */}
+                      <p>Date: {appointment.appointmentDate}</p>
+                      <p>Time Slot: {appointment.timeSlot}</p>
                       <button onClick={() => handleCancel(appointment.id)}>
                         Cancel Appointment
                       </button>
