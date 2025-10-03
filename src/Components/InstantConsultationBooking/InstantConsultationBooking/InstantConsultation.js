@@ -4,13 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import FindDoctorSearchIC from './FindDoctorSearchIC/FindDoctorSearchIC';
 import DoctorCardIC from './DoctorCardIC/DoctorCardIC';
 
-const InstantConsultation = () => {
+const InstantConsultation = ({ onBooking }) => { // ✅ receive onBooking from App.js
   const [searchParams] = useSearchParams();
   const [doctors, setDoctors] = useState([]);
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
 
-  // mapping of name → image URL for special doctors
   const doctorImages = {
     'Dr. Denis Raj':
       'https://bpic.588ku.com/element_origin_min_pic/23/09/25/77212ff637c099e705b1fbd04b5d26b4.jpg',
@@ -20,7 +19,6 @@ const InstantConsultation = () => {
       'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSAJsGn2UHZ507PT2boeQtQlmljrq91Ea8oQxFZUA8xNW7NIB7T',
   };
 
-  // fetch doctors list
   const getDoctorsDetails = useCallback(() => {
     fetch('https://api.npoint.io/9a5543d36f1460da2f63')
       .then((res) => res.json())
@@ -42,7 +40,6 @@ const InstantConsultation = () => {
       .catch((err) => console.log(err));
   }, [searchParams]);
 
-  // handle search input from the search bar
   const handleSearch = (searchText) => {
     if (searchText === '') {
       setFilteredDoctors([]);
@@ -60,14 +57,24 @@ const InstantConsultation = () => {
     getDoctorsDetails();
   }, [getDoctorsDetails]);
 
+  // ✅ UPDATED handleBooking: call App.js onBooking instead of localStorage
+  const handleBooking = (doctor, speciality, username, phone, date, time) => {
+    const appointment = { username, phone, doctor, speciality, date, time };
+
+    // Call App.js function to trigger Notification
+    if (onBooking) {
+      onBooking(appointment);
+    }
+
+    alert("Appointment booked successfully!");
+  };
+
   return (
     <center>
       <div className="searchpage-container">
-        {/* search bar always visible */}
         <FindDoctorSearchIC onSearch={handleSearch} />
 
         <div className="search-results-container">
-          {/* doctor list only shows after user searched */}
           {isSearched && (
             <center>
               <h2>
@@ -85,8 +92,18 @@ const InstantConsultation = () => {
                     speciality={doctor.speciality}
                     experience={doctor.experience}
                     ratings={doctor.ratings}
-                    // 👇 pick image from map; fallback default inside DoctorCardIC
                     image={doctorImages[doctor.name]}
+                    // ✅ Pass the updated handleBooking to DoctorCardIC
+                    onBook={(username, phone, date, time) =>
+                      handleBooking(
+                        doctor.name,
+                        doctor.speciality,
+                        username,
+                        phone,
+                        date,
+                        time
+                      )
+                    }
                   />
                 ))
               ) : (

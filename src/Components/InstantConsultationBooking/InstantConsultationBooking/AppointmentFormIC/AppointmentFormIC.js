@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [appointmentDate, setAppointmentDate] = useState(''); // ✅ new state
-  const [selectedSlot, setSelectedSlot] = useState('');
+  const [appointmentDate, setAppointmentDate] = useState('');
+  const [timeSlot, setTimeSlot] = useState(''); // renamed from selectedSlot
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, phoneNumber, appointmentDate, selectedSlot });
+    // send the object with correct keys
+    onSubmit({ name, phoneNumber, appointmentDate, timeSlot });
     setName('');
     setPhoneNumber('');
     setAppointmentDate('');
-    setSelectedSlot('');
+    setTimeSlot('');
   };
 
   return (
@@ -39,15 +40,14 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
         />
       </div>
 
-      {/* ✅ Add your new Date of Appointment field here */}
       <div className="form-group">
         <label htmlFor="appointmentDate">Date of Appointment:</label>
         <input
-          type="text" // changed from date to text
+          type="text"
           id="appointmentDate"
           value={appointmentDate}
           onChange={(e) => setAppointmentDate(e.target.value)}
-          placeholder="dd-----yyyy" // ✅ custom placeholder
+          placeholder="dd-mm-yyyy"
           required
         />
       </div>
@@ -56,8 +56,8 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
         <label htmlFor="timeSlot">Book Time Slot:</label>
         <select
           id="timeSlot"
-          value={selectedSlot}
-          onChange={(e) => setSelectedSlot(e.target.value)}
+          value={timeSlot}
+          onChange={(e) => setTimeSlot(e.target.value)}
           required
         >
           <option value="">Select a time slot</option>

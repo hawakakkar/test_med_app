@@ -5,8 +5,7 @@ import './DoctorCardIC.css';
 import AppointmentFormIC from '../AppointmentFormIC/AppointmentFormIC';
 import { v4 as uuidv4 } from 'uuid';
 
-// ✅ added image prop
-const DoctorCardIC = ({ name, speciality, experience, ratings, image }) => {
+const DoctorCardIC = ({ name, speciality, experience, ratings, image, onBook }) => {
   const [showModal, setShowModal] = useState(false);
   const [appointments, setAppointments] = useState([]);
 
@@ -19,16 +18,38 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, image }) => {
       (appointment) => appointment.id !== appointmentId
     );
     setAppointments(updatedAppointments);
+
+    // Remove from localStorage (optional)
+    localStorage.removeItem(name);
+    localStorage.removeItem("doctorData");
   };
 
   const handleFormSubmit = (appointmentData) => {
     const newAppointment = {
       id: uuidv4(),
-      ...appointmentData, // includes name, phoneNumber, appointmentDate, timeSlot
+      ...appointmentData, // expects { name, phoneNumber, appointmentDate, timeSlot }
     };
+
     const updatedAppointments = [...appointments, newAppointment];
     setAppointments(updatedAppointments);
     setShowModal(false);
+
+    // Save doctor info + appointment in localStorage (optional)
+    localStorage.setItem(
+      "doctorData",
+      JSON.stringify({ name, speciality, experience, ratings, image })
+    );
+    localStorage.setItem(name, JSON.stringify(newAppointment));
+
+    // ✅ Trigger Notification in App.js
+    if (typeof onBook === "function") {
+      onBook(
+        appointmentData.name,           // user name
+        appointmentData.phoneNumber,    // phone
+        appointmentData.appointmentDate,// date
+        appointmentData.timeSlot        // time
+      );
+    }
   };
 
   return (
@@ -115,7 +136,6 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, image }) => {
                     <div className="bookedInfo" key={appointment.id}>
                       <p>Name: {appointment.name}</p>
                       <p>Phone Number: {appointment.phoneNumber}</p>
-                      {/* NEW: show date and time slot */}
                       <p>Date: {appointment.appointmentDate}</p>
                       <p>Time Slot: {appointment.timeSlot}</p>
                       <button onClick={() => handleCancel(appointment.id)}>
@@ -128,7 +148,7 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, image }) => {
                 <AppointmentFormIC
                   doctorName={name}
                   doctorSpeciality={speciality}
-                  onSubmit={handleFormSubmit}
+                  onSubmit={handleFormSubmit} // ✅ pass the submit handler
                 />
               )}
             </div>

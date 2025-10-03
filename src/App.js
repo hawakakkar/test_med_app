@@ -1,30 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Navbar from './Components/Navbar/Navbar';
 import LandingPage from './Components/Landing_Page/LandingPage'; 
 import SignUp from "./Components/Sign_Up/Sign_Up";  
 import Login from './Components/Login/Login';                  
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultationBooking/InstantConsultation';
+import Notification from './Components/Notification/Notification';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
 function App() {
+  const [appointmentData, setAppointmentData] = useState(null);
+
+  // Called after booking
+  const handleBooking = (data) => {
+    setAppointmentData(data); // show notification
+  };
+
+  const handleDismiss = () => {
+    setAppointmentData(null); // hide notification
+  };
+
   return (
     <BrowserRouter>
-      <Navbar />   {/* always visible */}
-
+      {/* Notification always rendered at top */}
+      <Notification appointmentData={appointmentData} onDismiss={handleDismiss} />
+      <Navbar />
       <Routes>
-        {/* Home page */}
         <Route path="/" element={<LandingPage />} />  
-
-        {/* SignUp/Login pages */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} /> 
-
-        {/* Appointment page */}
-        <Route path="/appointments" element={<InstantConsultation />} />
-
-        {/* Optional direct link */}
-        <Route path="/instant-consultation" element={<InstantConsultation />} />
+        <Route path="/appointments" element={<InstantConsultation onBooking={handleBooking} />} />
+        <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} />} />
       </Routes>
     </BrowserRouter>
   );
