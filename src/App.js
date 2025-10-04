@@ -6,12 +6,13 @@ import SignUp from "./Components/Sign_Up/Sign_Up";
 import Login from './Components/Login/Login';                  
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultationBooking/InstantConsultation';
 import Notification from './Components/Notification/Notification';
+import ReviewForm from './Components/ReviewForm/ReviewForm';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   const [appointmentData, setAppointmentData] = useState(null);
 
-  // Called after booking
+  // Called after booking in InstantConsultation
   const handleBooking = (data) => {
     setAppointmentData(data); // show notification
   };
@@ -31,6 +32,9 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/appointments" element={<InstantConsultation onBooking={handleBooking} />} />
         <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} />} />
+        
+        {/* ✅ Pass appointmentData to ReviewForm (optional) */}
+        <Route path="/reviews" element={<ReviewForm appointmentData={appointmentData} />} />
       </Routes>
     </BrowserRouter>
   );

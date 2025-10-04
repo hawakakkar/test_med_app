@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import './InstantConsultation.css';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom'; // ✅ Added Link
 import FindDoctorSearchIC from './FindDoctorSearchIC/FindDoctorSearchIC';
 import DoctorCardIC from './DoctorCardIC/DoctorCardIC';
 
@@ -57,11 +57,10 @@ const InstantConsultation = ({ onBooking }) => { // ✅ receive onBooking from A
     getDoctorsDetails();
   }, [getDoctorsDetails]);
 
-  // ✅ UPDATED handleBooking: call App.js onBooking instead of localStorage
+  // ✅ Booking calls App.js onBooking
   const handleBooking = (doctor, speciality, username, phone, date, time) => {
     const appointment = { username, phone, doctor, speciality, date, time };
 
-    // Call App.js function to trigger Notification
     if (onBooking) {
       onBooking(appointment);
     }
@@ -93,7 +92,6 @@ const InstantConsultation = ({ onBooking }) => { // ✅ receive onBooking from A
                     experience={doctor.experience}
                     ratings={doctor.ratings}
                     image={doctorImages[doctor.name]}
-                    // ✅ Pass the updated handleBooking to DoctorCardIC
                     onBook={(username, phone, date, time) =>
                       handleBooking(
                         doctor.name,
@@ -109,6 +107,13 @@ const InstantConsultation = ({ onBooking }) => { // ✅ receive onBooking from A
               ) : (
                 <p>No doctors found.</p>
               )}
+
+              {/* ✅ Added Feedback Access Button */}
+              <div style={{ marginTop: '20px' }}>
+                <Link to="/review">
+                  <button className="feedback-btn">Leave Feedback</button>
+                </Link>
+              </div>
             </center>
           )}
         </div>
