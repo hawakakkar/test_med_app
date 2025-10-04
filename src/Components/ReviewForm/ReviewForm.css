@@ -1,0 +1,92 @@
+/* Container and title */
+.review-form-container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+  }
+  
+  .page-title {
+    margin: 6px 0 14px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  /* Optional appointment card */
+  .appointment-card {
+    border: 1px solid #e3e6ea;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    background: #fbfbfd;
+  }
+  
+  /* Table wrapper to allow horizontal scroll on small screens */
+  .table-wrap {
+    overflow-x: auto;
+    background: white;
+    border-radius: 6px;
+    padding: 6px;
+  }
+  
+  /* Table style */
+  .reviews-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* keep columns spaced like screenshot */
+  }
+  
+  .reviews-table th,
+  .reviews-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e9ecef;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 15px;
+  }
+  
+  .reviews-table thead th {
+    font-weight: 700;
+    background: #fafafa;
+    color: #333;
+    border-bottom: 2px solid #e6e9ee;
+  }
+  
+  /* Slight emphasis on first column */
+  .reviews-table td.serial {
+    width: 90px;
+    font-weight: 600;
+  }
+  
+  /* Button column */
+  .feedback-cell {
+    width: 170px;
+  }
+  
+  /* Blue rounded button like screenshot */
+  .primary-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    background: linear-gradient(#0b68d6, #0063c9); /* blue gradient */
+    color: #fff;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.06);
+  }
+  
+  /* Hover for button */
+  .primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(99, 97, 99, 0.08);
+  }
+  
+  /* Small responsive tweaks */
+  @media (max-width: 700px) {
+    .page-title { font-size: 22px; }
+    .reviews-table th, .reviews-table td { padding: 10px; font-size: 14px; }
+    .primary-btn { padding: 8px 12px; font-size: 13px; }
+  }
