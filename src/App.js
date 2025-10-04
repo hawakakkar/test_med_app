@@ -32,9 +32,9 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/appointments" element={<InstantConsultation onBooking={handleBooking} />} />
         <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} />} />
-        
-        {/* ✅ Pass appointmentData to ReviewForm (optional) */}
-        <Route path="/reviews" element={<ReviewForm appointmentData={appointmentData} />} />
+
+        {/* ✅ ReviewForm works even if appointmentData is empty */}
+        <Route path="/reviews" element={<ReviewForm appointmentData={appointmentData || {}} />} />
       </Routes>
     </BrowserRouter>
   );
