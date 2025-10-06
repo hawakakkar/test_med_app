@@ -6,7 +6,7 @@
   padding: 15px 40px;
   background-color: white;
   font-family: Arial, sans-serif;
-  position:sticky;
+  position: sticky;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
@@ -35,7 +35,6 @@
   list-style: none;
   display: flex;
   gap: 20px;
- 
 }
 
 .navbar-links li a {
@@ -54,13 +53,18 @@
   display: flex;
   gap: 10px;
 }
+.navbar-user {
+    white-space: nowrap; /* prevent wrapping to a new line */
+    cursor: pointer;
+    font-size: 16px;
+  }
 
 .btn {
   padding: 4px 12px; /* smaller buttons */
   border-radius: 16px;
   border: 1px solid #007bff;
   background: transparent;
-  color:#007bff;
+  color: #007bff;
   cursor: pointer;
   font-size: 0.85rem; /* smaller font */
   font-weight: 500;
@@ -80,3 +84,49 @@
 .btn-signup:hover {
   background: #0056b3;
 }
+
+/* ✅ Added dropdown styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.profile-btn:hover {
+  background-color: #0056b3;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  z-index: 10;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+}
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between welcome text and logout button */
+    position: relative; /* for profile popup positioning */
+  }
+  
+  .profile-popup {
+    position: absolute;
+    top: 40px; /* directly below the welcome text */
+    left: 0;   /* aligned with welcome text */
+    z-index: 1000;
+  }

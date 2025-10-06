@@ -7,6 +7,7 @@ import Login from './Components/Login/Login';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultationBooking/InstantConsultation';
 import Notification from './Components/Notification/Notification';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
+import ProfileCard from './Components/ProfileCard/ProfileCard';  // ✅ Added import
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
 
         {/* ✅ ReviewForm works even if appointmentData is empty */}
         <Route path="/reviews" element={<ReviewForm appointmentData={appointmentData || {}} />} />
+
+        {/* ✅ Added route for ProfileCard */}
+        <Route path="/profile" element={<ProfileCard />} />
       </Routes>
     </BrowserRouter>
   );
