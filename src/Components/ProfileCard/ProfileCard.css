@@ -1,22 +1,123 @@
+/* Profile card (collapsed view) */
 .profile-card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 208px;
-    height:210px;
-    text-align: center;
+  background: #ffffff;            /* light gray background */
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  padding: 18px;                  /* larger padding */
+  box-shadow: 0 6px 14px #b2adad;
+  width: 260px;                   /* wider box */
+  min-height: 240px;              /* taller box */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  color: #2c3e50;
+}
+
+/* Title */
+.profile-card h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;               /* bolder title */
+  color: #333;
+}
+
+/* Small details */
+.profile-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Profile form (expanded view) */
+.profile-form {
+  background:  rgb(240, 240, 240);           /* slightly different light gray for form */
+  border: 1px solid #e6e9ee;
+  border-radius: 3px;            /* keep form box radius */
+  padding: 18px;
+  width: 270px;  
+  height: 290px;                  /* form wider than card for comfortable input */
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Labels and inputs */
+.profile-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: #333;
+  font-weight: 700;
+}
+
+.profile-form input {
+  padding: 5px 19px;             /* smaller height & tighter look */
+  border: 1px solid #ffffff;
+  border-radius: 1px;            /* only 3px for inputs */
+  font-size: 13px;               /* slightly smaller text */
+  outline: none;
+  background: rgb(255, 255, 255);
+  transition: border-color 0.15s ease;
+  width: 97%;                    /* aligns nicely inside form */
+  box-sizing: border-box;
+}
+
+.profile-form input:focus {
+  border-color: #fcfcfc;
+  box-shadow: 0 0 0 3px rgba(125,167,255,0.08);
+}
+
+/* Buttons */
+.profile-form button,
+.profile-card button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border-radius: 3px;            /* 3px radius for Save button */
+  border: none;
+  background-color: #2d89ff;
+  color: white;
+  cursor: pointer;
+  font-weight: 400;
+  transition: background-color 0.15s ease;
+}
+
+.profile-form button:hover,
+.profile-card button:hover {
+  background-color: #ffffff;
+}
+
+/* Save button (green) */
+.save-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;            /* 3px radius only for Save button */
+  padding: 2px 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1px;
+  transition: background-color 0.3s;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+/* Edit / read-only view layout */
+.profile-container {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* Responsive fix for small screens */
+@media (max-width: 480px) {
+  .profile-card,
+  .profile-form {
+    width: 100%;
   }
-  .profile-link {
-    background: none;       /* remove button background */
-    color: #000;            /* black text */
-    text-decoration: underline; /* make it look like a link */
-    cursor: pointer;        /* pointer cursor on hover */
-    white-space: nowrap;    /* prevent breaking into two lines */
-    font-size: 16px;        /* adjust font size */
-  }
-  
-  .profile-link:hover {
-    color: #e9eef4;         /* optional: change color on hover */
-  }
+}

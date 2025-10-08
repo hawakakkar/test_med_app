@@ -7,7 +7,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
-  const [showProfileCard, setShowProfileCard] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showProfile, setShowProfile] = useState(false); // ✅ for showing ProfileCard inside box
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -19,8 +20,6 @@ const Navbar = () => {
     const token = sessionStorage.getItem("auth-token");
     setIsLoggedIn(!!token);
 
-    // Prefer a stored full name (e.g. "Kkr Hawa") if available,
-    // otherwise fall back to the part before the @ of the email.
     const storedName = sessionStorage.getItem("name");
     const email = sessionStorage.getItem("email");
 
@@ -33,8 +32,13 @@ const Navbar = () => {
     }
   }, []);
 
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown);
+    setShowProfile(false); // hide profile form when reopening dropdown
+  };
+
   const handleProfileClick = () => {
-    setShowProfileCard(!showProfileCard);
+    setShowProfile(true); // ✅ show ProfileCard inside same box
   };
 
   return (
@@ -49,36 +53,43 @@ const Navbar = () => {
       </div>
 
       <ul className="navbar-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/appointments">Appointments</Link>
-        </li>
-        <li>
-          <Link to="/blog">Health Blog</Link>
-        </li>
-        <li>
-          <Link to="/reviews">Reviews</Link>
-        </li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/appointments">Appointments</Link></li>
+        <li><Link to="/blog">Health Blog</Link></li>
+        <li><Link to="/reviews">Reviews</Link></li>
       </ul>
 
       <div className="navbar-buttons">
         {isLoggedIn ? (
           <div className="user-section">
-            <span className="navbar-user" onClick={handleProfileClick}>
+            <span className="navbar-user" onClick={handleDropdownToggle}>
               Welcome, {userName} ▼
             </span>
             <button onClick={handleLogout} className="btn logout">
               Logout
             </button>
 
-            {showProfileCard && (
-              <div className="profile-popup" onMouseLeave={() => setShowProfileCard(false)}>
-                {/* Pass username/email as props as fallback while fetch runs */}
-                <ProfileCard username={userName} email={sessionStorage.getItem("email") || ""} />
-
-            
+            {/* ✅ Single dropdown box */}
+            {showDropdown && (
+              <div className="profile-popup" onMouseLeave={() => setShowDropdown(false)}>
+                <div className="profile-box">
+                  {!showProfile ? (
+                    <>
+                      <p className="profile-item" onClick={handleProfileClick}>
+                        Your Profile
+                      </p>
+                      <Link
+                        to="/reports"
+                        className="profile-item"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        Your Reports
+                      </Link>
+                    </>
+                  ) : (
+                    <ProfileCard />
+                  )}
+                </div>
               </div>
             )}
           </div>

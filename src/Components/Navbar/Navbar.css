@@ -130,3 +130,29 @@
     left: 0;   /* aligned with welcome text */
     z-index: 1000;
   }
+  .profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  gap: 8px;
+  min-width: 180px;
+}
+
+.profile-item {
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.profile-item:hover {
+  background-color: #f2f2f2;
+}

@@ -77,7 +77,9 @@ const ProfileCard = () => {
         setUserDetails(updatedDetails);
         setEditMode(false);
         alert("Profile Updated Successfully!");
-        setShowForm(false);
+
+        // ❌ Do NOT hide the form for screenshot
+        // setShowForm(false);
       } else {
         throw new Error("Failed to update profile");
       }
@@ -125,7 +127,7 @@ const ProfileCard = () => {
                   onChange={handleInputChange}
                 />
               </label>
-              <button type="submit">Save</button>
+              <button type="submit" className="save-button">Save</button>
             </>
           ) : (
             <>
