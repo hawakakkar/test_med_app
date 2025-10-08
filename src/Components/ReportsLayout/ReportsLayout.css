@@ -1,0 +1,70 @@
+.reports-layout {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+/* Make title and table share the same centered width.
+   Title will be left-aligned inside that centered column. */
+.reports-title {
+  width: 50%;            /* same as the table width below */
+  margin: 0 auto 20px;   /* center the title block, with spacing under it */
+  text-align: left;      /* left-align the text within the centered column */
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Table styles - centered and compact */
+.reports-table {
+  width: 50%;            /* table width (adjust as you like: 70% / 75% / 80%) */
+  margin: 0 auto;        /* center the table */
+  border-collapse: collapse;
+  min-width: 600px;      /* keep columns spaced; reduce if you want more compact */
+}
+
+.reports-table th,
+.reports-table td {
+  padding: 8px 10px; /* compact spacing */
+  border-bottom: 1px solid #e9ecef;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.reports-table th {
+  background-color: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Buttons */
+.report-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+}
+
+.view-btn,
+.download-btn {
+  background-color: #007bff;
+}
+
+.report-btn:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reports-title,
+  .reports-table {
+    width: 95%;
+    min-width: 0;
+  }
+
+  .report-btn {
+    padding: 6px 10px;
+  }
+}
